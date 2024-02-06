@@ -1,5 +1,6 @@
-from fastapi.testclient import TestClient
 import pytest
+from fastapi.testclient import TestClient
+
 from fast_zero.app import app
 
 
@@ -36,6 +37,24 @@ def test_create_user(client):
         'username': 'alice',
         'email': 'alice@example.com',
         'id': 1,
+    }
+
+
+def test_get_user(client):
+    response = client.get('/users/1')
+    assert response.status_code == 200
+    assert response.json() == {
+        'username': 'alice',
+        'email': 'alice@example.com',
+        'id': 1,
+    }
+
+
+def test_get_user_with_invalid_id(client):
+    response = client.get('/users/0')
+    assert response.status_code == 404
+    assert response.json() == {
+        'detail': 'User not found',
     }
 
 
