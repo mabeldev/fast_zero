@@ -32,6 +32,7 @@ pythonpath = "."
 python = "^3.12"
 fastapi = "^0.109.2"
 uvicorn = "^0.27.0.post1"
+pydantic = {extras = ["email"], version = "^2.6.1"}
 
 
 [tool.poetry.group.dev.dependencies]
