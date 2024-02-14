@@ -87,4 +87,6 @@ def delete_user(
     session.delete(current_user)
     session.commit()
 
-    return {'message': 'User deleted'}
+    message = Message(detail='User deleted')
+
+    return message

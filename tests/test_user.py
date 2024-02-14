@@ -56,9 +56,9 @@ def test_update_user(client, user, token):
     }
 
 
-def test_update_user_with_wrong_user(client, other_user, token):
+def test_update_user_with_wrong_user(client, user2, token):
     response = client.put(
-        f'/users/{other_user.id}',
+        f'/users/{user2.id}',
         headers={'Authorization': f'Bearer {token}'},
         json={
             'username': 'bob',
@@ -76,12 +76,12 @@ def test_delete_user(client, user, token):
         headers={'Authorization': f'Bearer {token}'},
     )
     assert response.status_code == 200
-    assert response.json() == {'message': 'User deleted'}
+    assert response.json() == {'detail': 'User deleted'}
 
 
-def test_delete_user_wrong_user(client, other_user, token):
+def test_delete_user_wrong_user(client, user2, token):
     response = client.delete(
-        f'/users/{other_user.id}',
+        f'/users/{user2.id}',
         headers={'Authorization': f'Bearer {token}'},
     )
     assert response.status_code == 400
